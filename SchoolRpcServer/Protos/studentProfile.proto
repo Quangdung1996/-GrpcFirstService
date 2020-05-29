@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+option csharp_namespace = "SchoolRpc"; 
+
+package studentProfile;
+
+service StudentProfile{
+	rpc GetStudent (StudentRequest) returns (Student) ;
+	rpc GetStudentList (stream StudentRequest) returns (stream Student);	
+	rpc GetStudentListExtention (stream StudentRequest) returns (stream Student);	
+
+	rpc GetStudentReturnBaseResponse (StudentRequest) returns (BaseResponse) ;
+}
+
+message Student{
+	int32 id=1;
+	string name=2;
+	Gender gender=3;
+	string responseTime=4;
+}
+
+message StudentRequest 	{
+	int32 id=1;
+	string name=2;
+	Gender gender=3;
+}
+
+enum Gender{
+	ALL=0;
+	MALE=1;
+	FEMALE=2;
+}
+
+message BaseResponse {
+  bool Success = 1;
+  string Code = 2;
+  string Message = 3;
+  string DataString = 4;
+}
